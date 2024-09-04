@@ -1,0 +1,30 @@
+class Solution {
+    public int getLucky(String s, int k) {
+        StringBuilder num = new StringBuilder();  
+
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);  
+            int charValue = ch - 'a' + 1;
+            num.append(charValue);
+        }
+
+        int result = 0;
+
+        String numStr = num.toString();
+        for (int i = 0; i < numStr.length(); i++) {
+            char ch = numStr.charAt(i);
+            result += Character.getNumericValue(ch);  // Use Character.getNumericValue(ch) for clarity
+        }
+
+        for (int i = 1; i < k; i++) {
+            int newResult = 0;
+            while (result > 0) {
+                newResult += result % 10;
+                result /= 10;
+            }
+            result = newResult;
+        }
+
+        return result;
+    }
+}
